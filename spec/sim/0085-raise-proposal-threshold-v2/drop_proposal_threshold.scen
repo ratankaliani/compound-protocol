@@ -12,7 +12,7 @@ UseConfigs mainnet
 GovernorBravo Deploy BravoDelegate BravoDelegate2
 
 From CompHolder (Comp Delegate CompHolder)
-From CompHolder (GovernorBravo GovernorBravo Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [(Address BravoDelegate2)])
+From CompHolder (GovernorBravo GovernorBravo Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [[(Address BravoDelegate2)]])
 
 -- Vote for, queue, and execute the proposal
 MineBlock
