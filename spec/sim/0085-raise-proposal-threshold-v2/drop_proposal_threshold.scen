@@ -1,0 +1,40 @@
+#!/usr/bin/env yarn repl -s
+
+PrintTransactionLogs
+
+Alias Arr00 "0x2B384212EDc04Ae8bB41738D05BA20E33277bf33"
+Alias CompHolder "0xC89b6f0146642688bb254bF93C28fcCF1E182C81"
+Alias CalBlockchain "0x7AE109A63ff4DC852e063a673b40BED85D22E585"
+
+Web3Fork "https://mainnet-eth.compound.finance/@13181015" (CompHolder CalBlockchain Arr00)
+UseConfigs mainnet
+
+GovernorBravo Deploy BravoDelegate BravoDelegate2
+
+From CompHolder (Comp Delegate CompHolder)
+From CompHolder (GovernorBravo GovernorBravo Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [(Address BravoDelegate2)])
+
+-- Vote for, queue, and execute the proposal
+MineBlock
+AdvanceBlocks 14000
+From CompHolder (GovernorBravo GovernorBravo Proposal LastProposal Vote For)
+AdvanceBlocks 20000
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
+IncreaseTime 604910
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
+GovernorBravo GovernorBravoDelegator MergeABI BravoDelegate2
+
+From Arr00 (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [[(Address BravoDelegate2)]])
+
+Send CommunityMultisig 1e18
+
+-- Use community multisig
+From CommunityMultisig (GovernorBravo GovernorBravoDelegator Proposal LastProposal Cancel)
+From CommunityMultisig (GovernorBravo GovernorBravoDelegator SetWhitelistAccountExpiration (Address Arr00) 0)
+
+AllowFailures
+From Arr00 (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [[(Address BravoDelegate2)]])
+Assert Revert "revert GovernorBravo::propose: proposer votes below proposal threshold"
+
+
+Print "Setup whitelisted accounts ok!"
