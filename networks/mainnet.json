@@ -5,7 +5,7 @@
         "KNC": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
         "Pair_DAI_ETH": "0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11",
         "cLINKDelegate": "0x24aa720906378bb8364228bddb8cabbc1f6fe1ba",
-        "BravoDelegate2": "0xF72f77C65923042818482d8d74fB970750FE24dF",
+        "BravoDelegate2": "0xe3542dfDc7988E439ea0a48F0612f821Aa9fac64",
         "Uniswap": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
         "GovernorBravoDelegateG1": "0xAAAaaAAAaaaa8FdB04F544F4EEe52939CddCe378",
         "PriceOracle": "0x02557a5e05defeffd4cae6d83ea3d173b272c904",
@@ -270,7 +270,7 @@
         "BravoDelegate2": {
             "name": "BravoDelegate2",
             "contract": "GovernorBravoDelegate",
-            "address": "0xF72f77C65923042818482d8d74fB970750FE24dF"
+            "address": "0xe3542dfDc7988E439ea0a48F0612f821Aa9fac64"
         },
         "BravoDelegator2": {
             "name": "BravoDelegator2",
