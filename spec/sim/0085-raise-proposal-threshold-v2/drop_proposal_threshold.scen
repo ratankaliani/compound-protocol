@@ -15,7 +15,7 @@ GovernorBravo Deploy BravoDelegate BravoDelegate2
 From CompHolder (Comp Delegate CompHolder)
 From CompHolder2 (Comp Delegate CompHolder)
 From CompProposer (Comp Delegate CompProposer)
-From CompHolder (GovernorBravo GovernorBravoDelegator Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator)] [0] ["_setImplementation(address)"] [[(Address BravoDelegate2)]])
+From CompHolder (GovernorBravo GovernorBravoDelegator Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator) (Address GovernorBravoDelegate)] [0 0] ["_setImplementation(address)" "_setProposalThreshold(uint)"] [[(Address BravoDelegate2)] [50000000000000000000000]])
 
 -- Vote for, queue, and execute the proposal
 MineBlock
@@ -26,6 +26,7 @@ GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
 IncreaseTime 604910
 GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
 GovernorBravo GovernorBravoDelegator MergeABI BravoDelegate2
+
 
 -- Compound Holder makes proposal to reduce proposal threshold to 10K
 
