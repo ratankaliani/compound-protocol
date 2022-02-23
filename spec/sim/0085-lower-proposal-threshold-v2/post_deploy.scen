@@ -1,0 +1,47 @@
+#!/usr/bin/env yarn repl -s
+
+PrintTransactionLogs
+
+Alias CompHolder "0x7587caefc8096f5f40acb83a09df031a018c66ec" -- Compound Team 2
+Alias CompHolder2 "0x5608169973d639649196A84EE4085a708bcBf397" -- Compound Team 3
+Alias CompProposer "0xb326843982c5872768ea8E24dCe34D18b73f0B44" -- Compound Holder ~15K
+Alias NewBravoDelegate "0x30065B703DE5d473975A2db5bBB790A23FD6EFbD" -- New Bravo Delegate Contract
+
+
+Web3Fork "https://mainnet-eth.compound.finance/@14261479" (CompHolder CompHolder2 CompProposer NewBravoDelegate)
+UseConfigs mainnet
+
+GovernorBravo Deploy BravoDelegate BravoDelegate2
+
+From CompHolder (Comp Delegate CompHolder)
+From CompHolder2 (Comp Delegate CompHolder)
+From CompProposer (Comp Delegate CompProposer)
+
+-- Test that CompProposer proposing fails
+AllowFailures
+From CompProposer (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setProposalThreshold(uint256)"] [[10000000000000000000000]])
+Successfully
+Assert Revert "revert GovernorBravo::propose: proposer votes below proposal threshold"
+
+From CompHolder (GovernorBravo GovernorBravoDelegator Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator) (Address GovernorBravoDelegator)] [0 0] ["_setImplementation(address)" "_setProposalThreshold(uint256)"] [[(Address NewBravoDelegate)] [10000000000000000000000]])
+-- Vote for, queue, and execute the proposal
+MineBlock
+AdvanceBlocks 13140
+From CompHolder (GovernorBravo GovernorBravoDelegator Proposal LastProposal Vote For)
+AdvanceBlocks 20000
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
+IncreaseTime 604910
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
+
+-- Testing a proposer 10K < x < 65K
+From CompProposer (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setProposalThreshold(uint256)"] [[10000000000000000000000]])
+-- Vote for, queue, and execute the proposal
+MineBlock
+AdvanceBlocks 13140
+From CompHolder (GovernorBravo GovernorBravoDelegator Proposal LastProposal Vote For)
+AdvanceBlocks 20000
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
+IncreaseTime 604910
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
+
+Print "Lower proposal threshold v2 ok!"

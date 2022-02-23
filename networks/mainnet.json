@@ -5,7 +5,7 @@
         "KNC": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
         "Pair_DAI_ETH": "0xA478c2975Ab1Ea89e8196811F51A7B7Ade33eB11",
         "cLINKDelegate": "0x24aa720906378bb8364228bddb8cabbc1f6fe1ba",
-        "BravoDelegate2": "0xBb2B672a047e724c4A95518aaCe2837ba68439f6",
+        "BravoDelegate2": "0x2cE739cA9aa8145B83A9AfC61190100760752606",
         "Uniswap": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
         "GovernorBravoDelegateG1": "0xAAAaaAAAaaaa8FdB04F544F4EEe52939CddCe378",
         "PriceOracle": "0x02557a5e05defeffd4cae6d83ea3d173b272c904",
@@ -73,7 +73,7 @@
         "Timelock": "0x6d903f6003cca6255D85CcA4D3B5E5146dC33925",
         "IRM_COMP_Updateable": "0xd956188795ca6F4A74092ddca33E0Ea4cA3a1395",
         "Base200bps_Slope3000bps": "0xBAE04CbF96391086dC643e842b517734E214D698",
-        "GovernorBravoDelegate": "0x563a63d650a5d259abae9248dddc6867813d3f87",
+        "GovernorBravoDelegate": "0x30065B703DE5d473975A2db5bBB790A23FD6EFbD",
         "IRM_USDT_Updateable": "0xFB564da37B41b2F6B6EDcc3e56FbF523bD9F2012",
         "NewBravoDelegator": "0x0Be3ec736F9e33B0F4d843c1Cc9CcbC3042bC275",
         "StdComptrollerG4": "0xAf601CbFF871d0BE62D18F79C31e387c76fa0374",
@@ -103,7 +103,7 @@
     "Blocks": {
         "cUSDC": 7710760,
         "cLINKDelegate": 11960638,
-        "BravoDelegate2": 14251017,
+        "BravoDelegate2": 14261481,
         "GovernorBravoDelegateG1": 12005518,
         "PriceOracle": 6747538,
         "PriceFeed": 12864414,
@@ -270,7 +270,7 @@
         "BravoDelegate2": {
             "name": "BravoDelegate2",
             "contract": "GovernorBravoDelegate",
-            "address": "0xBb2B672a047e724c4A95518aaCe2837ba68439f6"
+            "address": "0x2cE739cA9aa8145B83A9AfC61190100760752606"
         },
         "BravoDelegator2": {
             "name": "BravoDelegator2",
