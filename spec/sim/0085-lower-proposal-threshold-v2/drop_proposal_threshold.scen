@@ -34,5 +34,13 @@ GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
 
 -- Testing a proposer 10K < x < 65K
 From CompProposer (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setProposalThreshold(uint256)"] [[10000000000000000000000]])
+-- Vote for, queue, and execute the proposal
+MineBlock
+AdvanceBlocks 13140
+From CompHolder (GovernorBravo GovernorBravoDelegator Proposal LastProposal Vote For)
+AdvanceBlocks 20000
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
+IncreaseTime 604910
+GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
 
 Print "Lower proposal threshold v2 ok!"
