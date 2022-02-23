@@ -16,6 +16,11 @@ From CompHolder (Comp Delegate CompHolder)
 From CompHolder2 (Comp Delegate CompHolder)
 From CompProposer (Comp Delegate CompProposer)
 
+-- Test that CompProposer proposing fails
+AllowFailures
+From CompProposer (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setProposalThreshold(uint256)"] [[10000000000000000000000]])
+Successfully
+Assert Revert "revert GovernorBravo::propose: proposer votes below proposal threshold"
 
 From CompHolder (GovernorBravo GovernorBravoDelegator Propose "Reduce Proposal Threshold" [(Address GovernorBravoDelegator) (Address GovernorBravoDelegator)] [0 0] ["_setImplementation(address)" "_setProposalThreshold(uint256)"] [[(Address BravoDelegate2)] [10000000000000000000000]])
 -- Vote for, queue, and execute the proposal
@@ -26,19 +31,8 @@ AdvanceBlocks 20000
 GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
 IncreaseTime 604910
 GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
-GovernorBravo GovernorBravoDelegator MergeABI BravoDelegate2
-
 
 -- Testing a proposer 10K < x < 65K
 From CompProposer (GovernorBravo GovernorBravoDelegator Propose "Test Proposal" [(Address GovernorBravoDelegator)] [0] ["_setProposalThreshold(uint256)"] [[10000000000000000000000]])
--- Vote for, queue, and execute the proposal
-MineBlock
-AdvanceBlocks 13140
-From CompHolder (GovernorBravo GovernorBravoDelegator Proposal LastProposal Vote For)
-AdvanceBlocks 20000
-GovernorBravo GovernorBravoDelegator Proposal LastProposal Queue
-IncreaseTime 604910
-GovernorBravo GovernorBravoDelegator Proposal LastProposal Execute
-GovernorBravo GovernorBravoDelegator MergeABI BravoDelegate2
 
 Print "Lower proposal threshold v2 ok!"
